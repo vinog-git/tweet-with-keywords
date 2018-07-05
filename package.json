@@ -1,0 +1,17 @@
+{
+  "name": "tweet-with-keywords",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ViNo G <vinovinothg@gmail.com> (https://github.com/vinog-git)",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "mongodb": "^3.1.0",
+    "twitter": "^1.7.1"
+  }
+}
