@@ -6,7 +6,7 @@ http.createServer((req, res) => {
     let response = {
         data: ''
     };
-    if (req.url === '/api/v1/tweet') {
+    if (req.url === '/api/v1/tweet' && req.headers.v_key === process.env.v_key) {
         let body = [];
         req.on('error', err => {
             console.log(err);
