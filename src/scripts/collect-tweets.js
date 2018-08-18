@@ -7,24 +7,30 @@ const twitter_key = JSON.parse(process.env.twitter_key);
 const T = Twitter(twitter_key);
 let timers = {};
 
+function collectTweets(keyword){
+    let tweetParams = {
+        q: keyword,
+        count: 100
+    }
+    T.get('search/tweets', tweetParams, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            ds[keyword].push(res.statuses);
+            console.log(`${res.statuses.length} new Tweets for ${keyword}`);
+        }
+    });
+}
+
 module.exports = (action, keyword) => {
     switch (action) {
         case 'add':
+            collectTweets(keyword);
+            
             // Collect tweet on regular interval
             timers[keyword] = setInterval(() => {
-                let tweetParams = {
-                    q: keyword,
-                    count: 100
-                }
-                T.get('search/tweets', tweetParams, (err, res) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        ds[keyword].push(res.statuses);
-                        console.log(`${res.statuses.length} new Tweets for ${keyword}`);
-                    }
-                });
-            }, 3600000);
+                collectTweets(keyword);
+            }, 1800000);
             break;
         case 'remove':
             clearInterval(timers[keyword]);

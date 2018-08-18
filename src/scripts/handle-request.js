@@ -4,7 +4,8 @@ const collectTweets = require('./collect-tweets');
 const retweet = require('./retweet-tweets');
 
 module.exports = (data) => {
-    data = data.slice(0, -1);
+    console.log({data});
+    // data = data.slice(0, -1);
     let option, keywords;
     [option, keywords] = data.split(':');
     if (keywords)
@@ -42,6 +43,7 @@ module.exports = (data) => {
                         ds[key] = [];
                         // Add timers to collect tweets for the new keyword after a delay
                         setTimeout(() => {
+                            console.log({key})
                             collectTweets('add', key);
                         }, Object.keys(ds).length * 1000);
                     } else {
