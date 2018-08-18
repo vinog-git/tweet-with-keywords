@@ -6,7 +6,11 @@ http.createServer((req, res) => {
     let response = {
         data: ''
     };
-    if (req.url === '/api/v1/tweet' && req.headers.v_key === process.env.v_key) {
+    let {
+        url,
+        headers
+    } = req;
+    if (url === '/api/v1/tweet' && headers.v_key === process.env.v_key) {
         let body = [];
         req.on('error', err => {
             console.log(err);
@@ -25,6 +29,12 @@ http.createServer((req, res) => {
             handleRequests(body);
             res.end(JSON.stringify(response));
         });
+    } else {
+        res.writeHead(200, {
+            'Content-Type': 'text/html'
+        });
+        res.write('Tweeting...');
+        res.end();
     }
 
 
