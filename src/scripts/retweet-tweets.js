@@ -23,7 +23,7 @@ function startTweeting(){
         if (index === Object.keys(ds).length) {
             index = 0;
         }
-        console.log(ds);
+        
         tweetsArray = ds[Object.keys(ds)[index]][0];
         if (tweetsArray.length) {
             let chosenTweet = Math.floor(Math.random() * tweetsArray.length);
